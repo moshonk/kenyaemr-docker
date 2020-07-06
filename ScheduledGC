@@ -1,8 +1,0 @@
-#!/bin/bash
-
-PID=`jps -lV | grep Bootstrap | awk '{print $1}'`;
-
-date
-jstat -gc $PID;
-jmap -histo:live $PID >/dev/null;
-jstat -gc $PID;
