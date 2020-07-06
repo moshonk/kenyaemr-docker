@@ -24,4 +24,4 @@ VOLUME /opt/kenyaemr/data
 
 EXPOSE 3306
 
-CMD ["/run.sh"]
+ENTRYPOINT ["/run.sh"]

@@ -8,7 +8,7 @@ services:
         image: kenyaemr:latest
         env_file: main.env
         volumes:
-             - ./openmrs:/root/.OpenMRS
+             - data:./openmrs:/root/.OpenMRS
         restart: unless-stopped
         ports:
             - 8080:8080
@@ -25,5 +25,5 @@ services:
             - 3306:3306
 networks:
     network:
-    volumes:
+volumes:
     data:
