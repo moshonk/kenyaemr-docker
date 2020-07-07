@@ -8,22 +8,28 @@ services:
         image: kenyaemr:latest
         env_file: main.env
         volumes:
-             - data:./openmrs:/root/.OpenMRS
+             - ./openmrs:/root/.OpenMRS
         restart: unless-stopped
         ports:
             - 8080:8080
+        networks:
+            - ke_network
     kenyaemr-mysql:
         build: mysql
         container_name: kenyaemr-mysql
+        env_file: main.env
         networks:
             - network
         volumes:
             - data:/opt/kenyaemr/data
-        hostname: isanteplus-mysql
+            - /var/lib/mysql
+#        hostname: kenyaemr-mysql
         restart: unless-stopped
         ports: 
             - 3306:3306
+        networks:
+            - ke_network
 networks:
-    network:
+    ke_network:
 volumes:
     data:

@@ -39,4 +39,7 @@ EXPOSE 8080
 
 # Setup openmrs, optionally load demo data, and start tomcat
 COPY run.sh /run.sh
+
+RUN chmod +x /run.sh
+
 ENTRYPOINT ["/run.sh"]

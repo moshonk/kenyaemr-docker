@@ -1,5 +1,5 @@
 #!/bin/sh
-set -ex
+#set -ex
 
 if [ ! -d "/run/mysqld" ]; then
 	mkdir -p /run/mysqld
@@ -10,11 +10,18 @@ if [ -d "$MYSQL_DATA_DIRECTORY" ]; then
 else
 	echo 'MySQL data directory does not exist'
 
+#  while ! mysqladmin ping --silent; do
+#      echo "Waiting for database"
+#      sleep 2
+#  done
+
   echo 'Initializing database'
 	mkdir -p "$MYSQL_DATA_DIRECTORY"
-	mysql_install_db --user=root --datadir="$MYSQL_DATA_DIRECTORY" --rpm
-	echo 'Database initialized'
+	echo "$MYSQL_DATA_DIRECTORY"
+	mysql_install_db --user=root --datadir="$MYSQL_DATA_DIRECTORY" --rpm --keep-my-cnf
 
+	echo 'Database initialized'
+	
 	tfile=$(mktemp)
   if [ ! -f "$tfile" ]; then
       return 1
