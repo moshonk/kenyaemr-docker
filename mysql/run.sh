@@ -35,7 +35,9 @@ else
 		GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION;
 		CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE\` CHARACTER SET utf8 COLLATE utf8_general_ci;
 		GRANT ALL ON \`$DB_NAME\`.* to '$OPENMRS_DB_USER'@'%' IDENTIFIED BY '$OPENMRS_DB_PASS';
+		CREATE DATABASE IF NOT EXISTS \`kenyaemr_etl\` CHARACTER SET utf8 COLLATE utf8_general_ci;
 		GRANT ALL ON kenyaemr_etl.* to '$OPENMRS_DB_USER'@'%' IDENTIFIED BY '$OPENMRS_DB_PASS';
+		CREATE DATABASE IF NOT EXISTS \`kenyaemr_datatools\` CHARACTER SET utf8 COLLATE utf8_general_ci;
 		GRANT ALL ON kenyaemr_datatools.* to '$OPENMRS_DB_USER'@'%' IDENTIFIED BY '$OPENMRS_DB_PASS';
 	EOF
 
@@ -46,6 +48,13 @@ else
 	unzip kenyaemr_db_20200719.sql.zip
 	cat kenyaemr_db_20200719.sql | mysql_embedded -uroot -p"$MYSQL_ROOT_PASSWORD" "$MYSQL_DATABASE"
 	rm -f kenyaemr_db_20200719.sql.zip
+	unzip kenyaemr_etl_dev_db_20200719.zip
+	cat kenyaemr_etl_dev_db_20200719.sql | mysql_embedded -uroot -p"$MYSQL_ROOT_PASSWORD" "kenyaemr_etl"
+	rm -f kenyaemr_etl_dev_db_20200719.sql.zip
+	unzip kenyaemr_dt_dev_db_20200719.zip
+	cat kenyaemr_dt_dev_db_20200719.sql | mysql_embedded -uroot -p"$MYSQL_ROOT_PASSWORD" "kenyaemr_datatools"
+	rm -f kenyaemr_dt_dev_db_20200719.sql.zip
+	
 fi
 
 echo 'Starting server'
