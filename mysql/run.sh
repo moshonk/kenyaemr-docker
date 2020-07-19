@@ -34,7 +34,9 @@ else
 		UPDATE user SET password=PASSWORD("$MYSQL_ROOT_PASSWORD") WHERE user='root';
 		GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION;
 		CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE\` CHARACTER SET utf8 COLLATE utf8_general_ci;
-		GRANT ALL ON \`$MYSQL_DATABASE\`.* to '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';
+		GRANT ALL ON \`$DB_NAME\`.* to '$OPENMRS_DB_USER'@'%' IDENTIFIED BY '$OPENMRS_DB_PASS';
+		GRANT ALL ON kenyaemr_etl.* to '$OPENMRS_DB_USER'@'%' IDENTIFIED BY '$OPENMRS_DB_PASS';
+		GRANT ALL ON kenyaemr_datatools.* to '$OPENMRS_DB_USER'@'%' IDENTIFIED BY '$OPENMRS_DB_PASS';
 	EOF
 
   /usr/sbin/mysqld --user=root --bootstrap --verbose=0 < "$tfile"
