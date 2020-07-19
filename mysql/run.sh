@@ -41,9 +41,9 @@ else
   rm -f "$tfile"
 
 	cd tmp
-	unzip kenyaemr_db_20200706.sql.zip
-	cat kenyaemr_db_20200706.sql | mysql_embedded -uroot -p"$MYSQL_ROOT_PASSWORD" "$MYSQL_DATABASE"
-	rm -f kenyaemr_db_20200706.sql.zip
+	unzip kenyaemr_db_20200719.sql.zip
+	cat kenyaemr_db_20200719.sql | mysql_embedded -uroot -p"$MYSQL_ROOT_PASSWORD" "$MYSQL_DATABASE"
+	rm -f kenyaemr_db_20200719.sql.zip
 fi
 
 echo 'Starting server'
