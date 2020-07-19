@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip
 
-COPY kenyaemr_db_20200706.sql.zip /tmp/kenyaemr_db_20200706.sql.zip
+COPY kenyaemr_db_20200719.sql.zip /tmp/kenyaemr_db_20200719.sql.zip
 
 COPY run.sh /run.sh
 
