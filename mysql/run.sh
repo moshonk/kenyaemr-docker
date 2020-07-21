@@ -48,10 +48,10 @@ else
 	unzip kenyaemr_db_20200719.sql.zip
 	cat kenyaemr_db_20200719.sql | mysql_embedded -uroot -p"$MYSQL_ROOT_PASSWORD" "$MYSQL_DATABASE"
 	rm -f kenyaemr_db_20200719.sql.zip
-	unzip kenyaemr_etl_dev_db_20200719.zip
+	unzip kenyaemr_etl_dev_db_20200719.sql.zip
 	cat kenyaemr_etl_dev_db_20200719.sql | mysql_embedded -uroot -p"$MYSQL_ROOT_PASSWORD" "kenyaemr_etl"
-	rm -f kenyaemr_etl_dev_db_20200719.sql.zip
-	unzip kenyaemr_dt_dev_db_20200719.zip
+	rm -f kenyaemr_etl_dev_db_20200719.zip
+	unzip kenyaemr_dt_dev_db_20200719.sql.zip
 	cat kenyaemr_dt_dev_db_20200719.sql | mysql_embedded -uroot -p"$MYSQL_ROOT_PASSWORD" "kenyaemr_datatools"
 	rm -f kenyaemr_dt_dev_db_20200719.sql.zip
 	
