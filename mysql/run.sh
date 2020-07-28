@@ -45,8 +45,8 @@ else
   rm -f "$tfile"
 
 	cd tmp
-	unzip kenyaemr_db_20200719.sql.zip
-	cat kenyaemr_db_20200719.sql | mysql_embedded -uroot -p"$MYSQL_ROOT_PASSWORD" "$MYSQL_DATABASE"
+	unzip kenyaemr_db_20200728.sql.zip
+	cat kenyaemr_db_20200728.sql | mysql_embedded -uroot -p"$MYSQL_ROOT_PASSWORD" "$MYSQL_DATABASE"
 	rm -f kenyaemr_db_20200719.sql.zip
 	unzip kenyaemr_etl_dev_db_20200719.sql.zip
 	cat kenyaemr_etl_dev_db_20200719.sql | mysql_embedded -uroot -p"$MYSQL_ROOT_PASSWORD" "kenyaemr_etl"
