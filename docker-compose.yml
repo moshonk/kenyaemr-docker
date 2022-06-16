@@ -26,7 +26,7 @@ services:
 #        hostname: kenyaemr-mysql
         restart: unless-stopped
         ports: 
-            - 3306:3306
+            - 3309:3306
         networks:
             - ke_network
 networks:

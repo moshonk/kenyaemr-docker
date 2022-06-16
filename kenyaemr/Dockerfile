@@ -1,4 +1,4 @@
-FROM tomcat:7-jre8
+FROM tomcat:6.0-jre7
 
 ENV OPENMRS_HOME /root/.OpenMRS
 ENV OPENMRS_MODULES ${OPENMRS_HOME}/modules
@@ -18,23 +18,26 @@ ENV OPENMRS_MYSQL_PORT=""
 # Create database and setup openmrs db user
 COPY openmrs.war /root/temp/
 RUN mkdir -p ${OPENMRS_HOME}
-RUN apt-get update && apt-get install -y mysql-client libxml2-utils openjdk-8-jdk \
+RUN apt-get update 
+RUN apt-get install software-properties-common -y 
+RUN add-apt-repository ppa:openjdk-r/ppa -y 
+RUN apt-get install -y mysql-client libxml2-utils openjdk-7-jdk \
     && mkdir -p /root/temp/modules
-RUN apt-get update \
- && DEBIAN_FRONTEND=noninteractive apt-get install -y \
-      cron rsyslog \
- && apt-get clean \
- && rm -rf /var/lib/apt/lists/*
- COPY ./crontab-sample /etc/cron.d/session-schedule-task
- RUN chmod 0644 /etc/cron.d/session-schedule-task
+#RUN apt-get update \
+# && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+#      cron rsyslog \
+# && apt-get clean \
+# && rm -rf /var/lib/apt/lists/*
+# COPY ./crontab-sample /etc/cron.d/session-schedule-task
+# RUN chmod 0644 /etc/cron.d/session-schedule-task
  ENV TZ=Africa/Nairobi
- RUN ln -fs /usr/share/zoneinfo/$TZ /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
- RUN echo "cron.* /var/log/cron.log" >> /etc/rsyslog.conf
+# RUN ln -fs /usr/share/zoneinfo/$TZ /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
+# RUN echo "cron.* /var/log/cron.log" >> /etc/rsyslog.conf
 ADD modules /root/temp/modules/
 #Copy OpenMRS properties file
 COPY openmrs-runtime.properties /root/temp/
-COPY ./InvalidateHTTPSessions InvalidateHTTPSessions
-COPY ./ScheduledGC ScheduledGC
+#COPY ./InvalidateHTTPSessions InvalidateHTTPSessions
+#COPY ./ScheduledGC ScheduledGC
 EXPOSE 8080
 
 # Setup openmrs, optionally load demo data, and start tomcat
